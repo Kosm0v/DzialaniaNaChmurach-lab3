@@ -16,3 +16,9 @@ resource "aws_iam_role" "role" {
   name               = var.role_name
   assume_role_policy = data.aws_iam_policy_document.trust_relationship.json
 }
+
+resource "aws_iam_role_policy_attachment" "policy_attachment" {
+  for_each   = var.policy_arns
+  role       = aws_iam_role.role.name
+  policy_arn = each.value
+}

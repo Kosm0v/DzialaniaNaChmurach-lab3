@@ -9,3 +9,7 @@ variable "statements" {
 variable "role_name" {
   type = string
 }
+
+variable "policy_arns" {
+  type = set(string)
+}
