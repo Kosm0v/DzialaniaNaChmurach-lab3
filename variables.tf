@@ -5,6 +5,7 @@ variable "iam_roles" {
       type        = string
       identifiers = list(string)
     }))
+    policies = set(string)
   }))
 }
 

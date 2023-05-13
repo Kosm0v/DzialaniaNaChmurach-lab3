@@ -7,6 +7,7 @@ iam_roles = {
         identifiers = ["lambda.amazonaws.com"]
       }
     }
+    policies = ["KosmowskiBasicLambdaPermision", "KosmowskiDynamodbAllowGetItem"]
   }
 }
 

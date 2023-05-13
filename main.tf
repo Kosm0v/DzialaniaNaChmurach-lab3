@@ -6,10 +6,11 @@ module "iam_policy" {
 }
 
 module "iam_role" {
-  source     = "./terraform/iam_role"
-  for_each   = var.iam_roles
-  statements = each.value.statements
-  role_name  = each.key
+  source      = "./terraform/iam_role"
+  for_each    = var.iam_roles
+  statements  = each.value.statements
+  role_name   = each.key
+  policy_arns = [for policy_name in each.value.policies : module.iam_policy[policy_name].policy_arn]
 }
 
 module "lambda_function" {
@@ -22,4 +23,8 @@ module "lambda_function" {
   handler       = each.value.handler
   runtime       = each.value.runtime
   timeout       = each.value.timeout
+}
+
+output "policies" {
+  value = module.iam_role["KosmowskiDynamodbGetItemRole"].policy_arns
 }
