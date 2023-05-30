@@ -21,3 +21,7 @@ variable "runtime" {
 variable "timeout" {
   type = number
 }
+
+variable "environment_variables" {
+  type = map(string)
+}

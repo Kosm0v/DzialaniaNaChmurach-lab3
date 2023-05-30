@@ -11,10 +11,11 @@ variable "iam_roles" {
 
 variable "lambda_functions" {
   type = map(object({
-    filename  = string
-    role_name = string
-    handler   = string
-    runtime   = string
-    timeout   = number
+    filename              = string
+    role_name             = string
+    handler               = string
+    runtime               = string
+    timeout               = number
+    environment_variables = map(string)
   }))
 }

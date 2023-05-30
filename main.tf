@@ -17,14 +17,11 @@ module "lambda_function" {
   source   = "./terraform/lambda_function"
   for_each = var.lambda_functions
 
-  function_name = each.key
-  filename      = each.value.filename
-  role_arn      = module.iam_role[each.value.role_name].role_arn
-  handler       = each.value.handler
-  runtime       = each.value.runtime
-  timeout       = each.value.timeout
-}
-
-output "policies" {
-  value = module.iam_role["KosmowskiDynamodbGetItemRole"].policy_arns
+  function_name         = each.key
+  filename              = each.value.filename
+  role_arn              = module.iam_role[each.value.role_name].role_arn
+  handler               = each.value.handler
+  runtime               = each.value.runtime
+  timeout               = each.value.timeout
+  environment_variables = each.value.environment_variables
 }
