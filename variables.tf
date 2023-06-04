@@ -5,7 +5,7 @@ variable "iam_roles" {
       type        = string
       identifiers = list(string)
     }))
-    policies = set(string)
+    policy_name = string
   }))
 }
 
@@ -17,5 +17,20 @@ variable "lambda_functions" {
     runtime               = string
     timeout               = number
     environment_variables = map(string)
+  }))
+}
+
+variable "dynamodb_tables" {
+  type = map(object({
+    billing_mode   = string
+    hash_key       = string
+    attribute_name = string
+    attribute_type = string
+  }))
+}
+
+variable "api_gateways" {
+  type = map(object({
+    protocol_type = string
   }))
 }

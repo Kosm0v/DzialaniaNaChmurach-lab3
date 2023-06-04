@@ -1,5 +1,5 @@
 iam_roles = {
-  "KosmowskiDynamodbGetItemRole" = {
+  "Kosmowski-DynamodbGetItemRole" = {
     statements = {
       "AllowAssumeForLambda" = {
         actions     = ["sts:AssumeRole"]
@@ -7,20 +7,40 @@ iam_roles = {
         identifiers = ["lambda.amazonaws.com"]
       }
     }
-    policies = ["KosmowskiBasicLambdaPermision", "KosmowskiDynamodbAllowGetItem"]
+    policy_name = "Kosmowski-LambdaRole"
   }
 }
 
 lambda_functions = {
-  "ReturnPriceOfProduct" = {
-    filename  = "ReturnPriceOfProduct.zip"
-    role_name = "KosmowskiDynamodbGetItemRole"
+  "Kosmowski-ZwrocCenySzkolenia" = {
+    filename  = "Kosmowski-ZwrocCenySzkolenia.zip"
+    role_name = "Kosmowski-DynamodbGetItemRole"
     handler   = "main.lambda_handler"
     runtime   = "python3.9"
-    timeout   = 30
+    timeout   = 10
     environment_variables = {
-      "DYNAMODB_TABLE_NAME" = "ceny"
-      "API_KEY"             = "UyKd2n7XJ3ZJnD50eS51PWLC9coV7WAu"
+      "DYNAMODB_TABLE_NAME" = "Kosmowski-Ceny"
     }
+  }
+}
+
+dynamodb_tables = {
+  "Kosmowski-Ceny" = {
+    billing_mode   = "PAY_PER_REQUEST"
+    hash_key       = "Usluga"
+    attribute_name = "Usluga"
+    attribute_type = "S"
+  }
+  "Kosmowski-Ceny2" = {
+    billing_mode   = "PAY_PER_REQUEST"
+    hash_key       = "Usluga"
+    attribute_name = "Usluga"
+    attribute_type = "S"
+  }
+}
+
+api_gateways = {
+  "Kosmowski-CenyAPI" = {
+    protocol_type = "HTTP"
   }
 }

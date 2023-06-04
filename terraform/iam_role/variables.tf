@@ -10,6 +10,6 @@ variable "role_name" {
   type = string
 }
 
-variable "policy_arns" {
-  type = set(string)
+variable "policy_arn" {
+  type = string
 }
